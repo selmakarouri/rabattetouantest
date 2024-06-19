@@ -29,7 +29,27 @@ if (window.location.href.startsWith(vtvUrlPrefix)) {
     "use strict";
 
     var isOkButtonClicked = false;
+async function RemplirLocation() {
+      var locationElement;
+      var isVisibleLocation;
+      for (var i = 1; i < 10; i++) {
+        locationElement = document.querySelector(
+          '[aria-owns="Location' + i + '_listbox"]'
+        );
+        if (locationElement !== null) {
+          isVisibleLocation = locationElement.offsetParent !== null;
 
+          if (isVisibleLocation) {
+            console.log("Location " + i + " is visible");
+            var Location = $("#Location" + i).data("kendoDropDownList");
+            Location.select(1); // 1 corresponds to 'Rabat'
+            Location.trigger("change");
+          } else {
+            // console.log("Element " + i + " is not visible");
+          }
+        }
+      }
+    }
     async function RemplirCategoryId() {
       var AppointmentCategoryIdElement;
       var isVisible;
@@ -55,27 +75,7 @@ if (window.location.href.startsWith(vtvUrlPrefix)) {
       }
     }
 
-    async function RemplirLocation() {
-      var locationElement;
-      var isVisibleLocation;
-      for (var i = 1; i < 10; i++) {
-        locationElement = document.querySelector(
-          '[aria-owns="Location' + i + '_listbox"]'
-        );
-        if (locationElement !== null) {
-          isVisibleLocation = locationElement.offsetParent !== null;
-
-          if (isVisibleLocation) {
-            console.log("Location " + i + " is visible");
-            var Location = $("#Location" + i).data("kendoDropDownList");
-            Location.select(1); // 1 corresponds to 'Rabat'
-            Location.trigger("change");
-          } else {
-            // console.log("Element " + i + " is not visible");
-          }
-        }
-      }
-    }
+    
 
     async function RemplirVisaType() {
       var VisaTypeElement;
